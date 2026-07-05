@@ -239,6 +239,7 @@ function icons() {
           (px - cw / 2) * s,
           -(py - ch / 2) * s,
           (Math.random() - 0.5) * 0.12,
+          1 + Math.min(4, Math.floor(px / 520)),      // hover group per product
         ]);
       }
     }

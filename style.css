@@ -41,9 +41,9 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .serif { font-family: var(--font-serif); font-style: italic; }
 .mono {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.8125rem;
   font-weight: 400;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -278,8 +278,8 @@ main { position: relative; z-index: 10; }
 .answers li::before {
   content: counter(ans, decimal-leading-zero);
   font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.22em;
+  font-size: 0.8125rem;
+  letter-spacing: 0.16em;
   color: var(--accent);
   flex-shrink: 0;
 }
@@ -322,7 +322,7 @@ main { position: relative; z-index: 10; }
 }
 
 .sub {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
   color: var(--dim);
   max-width: 640px;
   margin: 34px auto 0;
@@ -331,7 +331,7 @@ main { position: relative; z-index: 10; }
 .wrap.left-align .sub { margin-left: 0; }
 
 .body-line {
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-size: clamp(1.1rem, 1.4vw, 1.25rem);
   line-height: 1.65;
   max-width: 680px;
   margin-top: 22px;
@@ -377,15 +377,29 @@ main { position: relative; z-index: 10; }
 }
 .timeline-row li { display: flex; flex-direction: column; gap: 7px; }
 .tl-name { color: var(--ink); }
-.tl-year { color: var(--accent); font-size: 0.625rem; }
+.tl-year { color: var(--accent); font-size: 0.8125rem; }
 .tl-quote {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.02rem;
+  font-size: 1.1rem;
   color: var(--dim);
   line-height: 1.45;
 }
 .s3 .body-line { max-width: 760px; }
+
+.timeline-row li {
+  cursor: pointer;
+  padding: 10px;
+  margin: -10px;
+  border-radius: 8px;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s;
+}
+.timeline-row li:hover {
+  transform: translateY(-6px);
+  background-color: rgba(255, 196, 107, 0.06);
+}
+.timeline-row li:hover .tl-name { color: #ffd9a0; text-shadow: 0 0 16px rgba(255, 196, 107, 0.6); }
+.timeline-row li:hover .tl-quote { color: var(--ink); }
 
 /* ---------- s5 · problem ≠ solution ---------- */
 .neq-grid {
@@ -446,7 +460,7 @@ main { position: relative; z-index: 10; }
   background: var(--bg);
   padding: 0 8px;
   color: var(--accent);
-  font-size: 0.5625rem;
+  font-size: 0.75rem;
   opacity: 0;
   transition: opacity 0.6s ease 1.3s;
 }
@@ -536,9 +550,9 @@ main { position: relative; z-index: 10; }
 .spin-rev { transform-origin: 32px 32px; animation: spin 20s linear infinite reverse; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.card-eyebrow { color: var(--spotify); font-size: 0.5625rem; margin-bottom: 6px; }
+.card-eyebrow { color: var(--spotify); font-size: 0.75rem; margin-bottom: 6px; }
 .card-title { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.02em; }
-.card-sub { color: var(--dim); margin-top: 6px; font-size: 0.625rem; }
+.card-sub { color: var(--dim); margin-top: 6px; font-size: 0.75rem; }
 
 .card-actions {
   display: flex;
@@ -551,7 +565,7 @@ main { position: relative; z-index: 10; }
   color: #06120a;
   border-radius: 999px;
   padding: 9px 20px;
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   box-shadow: 0 0 26px rgba(30, 215, 96, 0.55);
   animation: pill-glow 2.8s ease-in-out infinite;
 }
@@ -568,8 +582,8 @@ main { position: relative; z-index: 10; }
   padding: 13px 0;
   border-top: 1px solid rgba(30, 215, 96, 0.14);
   color: var(--dim);
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
   text-transform: none;
 }
 .card-list li span:nth-child(2) { flex: 1; color: var(--ink); }
@@ -671,7 +685,7 @@ main { position: relative; z-index: 10; }
   justify-content: space-between;
   margin-top: 34px;
   color: var(--dim);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
 }
 
 /* ---------- s14 · final ---------- */
@@ -751,13 +765,13 @@ main { position: relative; z-index: 10; }
   mix-blend-mode: difference;
   pointer-events: none;
   opacity: 0;
-  transition: width 0.35s, height 0.35s, margin 0.35s, opacity 0.35s;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1), margin 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s;
 }
 body.has-cursor .cursor { opacity: 1; }
 .cursor.grow {
-  width: 46px;
-  height: 46px;
-  margin: -23px 0 0 -23px;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
 }
 @media (hover: hover) and (pointer: fine) {
   body.has-cursor,
