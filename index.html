@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Illusion of User-Centered Design</title>
+  <meta name="theme-color" content="#0a0a0b" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='7' fill='%23ff5b26'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=13" />
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <p class="mono loader-label">KNOWLEDGE SHARING SESSION</p>
+      <p class="loader-title">The Illusion of User&#8209;Centered Design</p>
+      <div class="loader-bar"><span id="loaderBar"></span></div>
+    </div>
+  </div>
+
+  <!-- WebGL canvas -->
+  <canvas id="gl"></canvas>
+
+  <!-- Fixed UI -->
+  <header class="ui-header">
+    <p class="mono">THE ILLUSION OF USER&#8209;CENTERED DESIGN</p>
+    <p class="mono">KSS &middot; 60 MIN</p>
+  </header>
+
+  <nav class="ui-dots" id="dots" aria-label="Slides"></nav>
+
+  <div class="ui-counter mono"><span id="counterNow">01</span>&nbsp;/&nbsp;<span id="counterTotal">17</span></div>
+
+  <div class="ui-scrollhint mono" id="scrollHint">
+    <span>SCROLL</span>
+    <span class="hint-line"></span>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <!-- ============ SECTIONS ============ -->
+  <main id="sections">
+
+    <!-- 01 · HERO -->
+    <section class="panel s0" id="s0">
+      <div class="meta mono r"><span>01</span><span>00:00</span><span>WELCOME</span></div>
+      <div class="wrap center">
+        <p class="kicker mono r">A KNOWLEDGE-SHARING SESSION &middot; 60 MINUTES</p>
+        <h1 class="display r">The <em>Illusion</em> of<br />User&#8209;Centered Design</h1>
+        <p class="sub r">What if the thing we&rsquo;ve been taught to prioritize&hellip; is also limiting us?</p>
+      </div>
+    </section>
+
+    <!-- 02 · QUOTE -->
+    <section class="panel s1" id="s1">
+      <div class="meta mono r"><span>02</span><span>05:00</span><span>THE QUOTE</span></div>
+      <div class="wrap center">
+        <blockquote class="quote">
+          <p class="quote-text r">&ldquo;If I had asked people what they wanted, they would have said <em>faster horses</em>.&rdquo;</p>
+          <cite class="mono r">&mdash; HENRY FORD</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- 03 · THE QUESTION -->
+    <section class="panel s2" id="s2">
+      <div class="meta mono r"><span>03</span><span>07:00</span><span>THE QUESTION</span></div>
+      <div class="wrap left-align">
+        <h2 class="display-md r">Can users describe a future they&rsquo;ve never <em>experienced</em>?</h2>
+      </div>
+    </section>
+
+    <!-- 04 · TIMELINE -->
+    <section class="panel s3" id="s3">
+      <div class="meta mono r"><span>04</span><span>09:00</span><span>THE TIMELINE</span></div>
+      <div class="wrap bottom">
+        <p class="kicker mono r">LET&rsquo;S TEST THAT QUESTION AGAINST REALITY</p>
+        <h2 class="display-md r">How many users asked for <em>exactly</em> this?</h2>
+        <ul class="timeline-row r">
+          <li><span class="tl-name mono">WALKMAN</span><span class="tl-year mono">1979</span><span class="tl-quote">&ldquo;I hate carrying a stack of cassettes.&rdquo;</span></li>
+          <li><span class="tl-name mono">IPHONE</span><span class="tl-year mono">2007</span><span class="tl-quote">&ldquo;I want fewer devices, not more.&rdquo;</span></li>
+          <li><span class="tl-name mono">AIRBNB</span><span class="tl-year mono">2008</span><span class="tl-quote">&ldquo;I don&rsquo;t trust strangers&rsquo; spare rooms.&rdquo;</span></li>
+          <li><span class="tl-name mono">UBER</span><span class="tl-year mono">2009</span><span class="tl-quote">&ldquo;I wish taxis showed up.&rdquo;</span></li>
+          <li><span class="tl-name mono">NETFLIX</span><span class="tl-year mono">2007</span><span class="tl-quote">&ldquo;I&rsquo;m sick of late fees.&rdquo;</span></li>
+        </ul>
+        <p class="body-line r"><em class="serif">Almost none.</em> What they actually said was much smaller &mdash; complaints about the present, never descriptions of the solution. <strong>They described friction. Designers converted friction into form.</strong></p>
+      </div>
+    </section>
+
+    <!-- 05 · BIG IDEA 1 -->
+    <section class="panel s4 idea" id="s4">
+      <div class="meta mono r"><span>05</span><span>12:00</span><span>BIG IDEA Nº1</span></div>
+      <div class="wrap center">
+        <p class="kicker mono accent r">BIG IDEA Nº1</p>
+        <h2 class="display r">Users are experts in <em>problems</em>.<br />Designers are experts in <em>possibilities</em>.</h2>
+        <p class="sub r">Two different kinds of expertise. Conflating them is where design processes quietly go wrong.</p>
+      </div>
+    </section>
+
+    <!-- 06 · PROBLEM ≠ SOLUTION -->
+    <section class="panel s5" id="s5">
+      <div class="meta mono r"><span>06</span><span>14:00</span><span>PROBLEM &ne; SOLUTION</span></div>
+      <div class="wrap">
+        <div class="neq-grid">
+          <div class="neq-col r">
+            <p class="mono neq-label">USERS OWN THIS</p>
+            <h3 class="neq-word">Problem</h3>
+            <p class="neq-body">Research discovers reality &mdash; what&rsquo;s broken, what hurts, what people are settling for.</p>
+          </div>
+          <div class="neq-mid" aria-hidden="true"></div>
+          <div class="neq-col right r">
+            <p class="mono neq-label">DESIGNERS OWN THIS</p>
+            <h3 class="neq-word">Solution</h3>
+            <p class="neq-body">Design imagines alternatives &mdash; the things that don&rsquo;t exist yet.</p>
+          </div>
+        </div>
+        <p class="body-line center-text r">Treating research output as a finished brief skips the part where design actually happens.</p>
+      </div>
+    </section>
+
+    <!-- 07 · BICYCLE — THE QUESTION -->
+    <section class="panel s6" id="s6">
+      <div class="meta mono r"><span>07</span><span>17:00</span><span>LIVE EXERCISE</span></div>
+      <div class="wrap left-align">
+        <p class="kicker mono accent r">LIVE EXERCISE &middot; 90 SECONDS</p>
+        <h2 class="display-md r">How should bicycles become <em>faster</em>?</h2>
+        <p class="body-line r">Turn to the person next to you. If you were surveying regular cyclists on how to make bicycles faster &mdash; <strong>what would they suggest?</strong></p>
+        <p class="mono dim-label r">GO.</p>
+        <p class="cue r">walk the room while they talk</p>
+      </div>
+    </section>
+
+    <!-- 08 · BICYCLE — THE ANSWERS -->
+    <section class="panel s7" id="s7">
+      <div class="meta mono r"><span>08</span><span>19:00</span><span>COLLECTING ANSWERS</span></div>
+      <div class="wrap right-align">
+        <p class="kicker mono accent r">OKAY &mdash; SHOUT SOME OUT</p>
+        <h2 class="display-md r">The room says:</h2>
+        <ul class="answers r">
+          <li data-hi="1">Lighter frames.</li>
+          <li data-hi="2">Better gears.</li>
+          <li data-hi="3">Thinner tires.</li>
+          <li data-hi="4">More aerodynamic shape.</li>
+          <li data-hi="5">Better brakes &mdash; confidence at speed.</li>
+        </ul>
+        <p class="body-line dim r">Every answer makes the bicycle better. Hold that thought.</p>
+        <p class="cue r">hover an answer &mdash; the bike knows which part you mean</p>
+      </div>
+    </section>
+
+    <!-- 09 · BICYCLE — WHAT NOBODY SAID -->
+    <section class="panel s8" id="s8">
+      <div class="meta mono r"><span>09</span><span>21:00</span><span>THE REVEAL</span></div>
+      <div class="wrap left-align">
+        <p class="kicker mono accent r">NOTICE WHAT NOBODY SAID</p>
+        <h2 class="display-md r">Nobody said: <em>add an engine.</em></h2>
+        <p class="body-line r">No motorcycle. No e&#8209;bike. No rocket booster. Not because they&rsquo;re bad ideas &mdash; because the question anchored you inside the category of <strong>bicycle</strong>. Ask people how to improve a thing, and you get improvements to that thing. Almost never a different thing entirely.</p>
+        <p class="body-line dim r">Ask &ldquo;how can we make checkout faster&rdquo; and you&rsquo;ll get a faster checkout &mdash; never &ldquo;eliminate checkout as a step.&rdquo; Users answer inside the frame they&rsquo;re given.</p>
+      </div>
+    </section>
+
+    <!-- 10 · BIG IDEA 2 -->
+    <section class="panel s9 idea" id="s9">
+      <div class="meta mono r"><span>10</span><span>24:00</span><span>BIG IDEA Nº2</span></div>
+      <div class="wrap center">
+        <p class="kicker mono accent r">BIG IDEA Nº2</p>
+        <h2 class="display r">Research is <em>descriptive</em>.<br />Design is <em>generative</em>.</h2>
+        <p class="sub r">The answer is not hiding in the transcripts. Research narrows the possibility space &mdash; it doesn&rsquo;t hand you the design.</p>
+      </div>
+    </section>
+
+    <!-- 11 · PROCESS -->
+    <section class="panel s10" id="s10">
+      <div class="meta mono r"><span>11</span><span>27:00</span><span>THE PROCESS</span></div>
+      <div class="wrap bottom">
+        <h2 class="display-md r">Research touches only the edges.</h2>
+        <div class="stages r">
+          <span class="stage" data-hi="1">Observe</span>
+          <span class="stage-arrow mono">&rarr;</span>
+          <span class="dzone">
+            <span class="stage" data-hi="2">Interpret</span>
+            <span class="stage-arrow mono">&rarr;</span>
+            <span class="stage" data-hi="3">Imagine</span>
+            <span class="stage-arrow mono">&rarr;</span>
+            <span class="stage" data-hi="4">Prototype</span>
+            <span class="dzone-label mono">THIS IS WHERE DESIGN LIVES</span>
+          </span>
+          <span class="stage-arrow mono">&rarr;</span>
+          <span class="stage" data-hi="5">Validate</span>
+        </div>
+        <p class="body-line dim r">The middle three stages don&rsquo;t show up in a research report &mdash; and they&rsquo;re the hardest to defend in a stakeholder meeting, because you can&rsquo;t point to a user quote to justify them.</p>
+      </div>
+    </section>
+
+    <!-- 12 · INTUITION -->
+    <section class="panel s11" id="s11">
+      <div class="meta mono r"><span>12</span><span>30:00</span><span>LIVE MOMENT</span></div>
+      <div class="wrap left-align">
+        <p class="kicker mono accent r">LIVE MOMENT &middot; SHOW OF HANDS</p>
+        <h2 class="display-md r">When did designers become afraid of <em>intuition</em>?</h2>
+        <p class="body-line r"><em class="serif">&ldquo;That&rsquo;s just your opinion &mdash; do you have data for that?&rdquo;</em></p>
+        <p class="body-line r">A gut feeling is a guess. <strong>Expert intuition is pattern recognition.</strong></p>
+      </div>
+    </section>
+
+    <!-- 13 · DISCOVER WEEKLY -->
+    <section class="panel s12" id="s12">
+      <div class="meta mono r"><span>13</span><span>35:00</span><span>PATTERNS</span></div>
+      <div class="wrap split-wrap">
+        <div class="split-text">
+          <h2 class="display-md r">&ldquo;Nobody asked for this.&rdquo;</h2>
+          <p class="body-line r">People said: <em class="serif">&ldquo;I can&rsquo;t find new music I&rsquo;ll actually like.&rdquo;</em></p>
+          <p class="body-line dim r">A vague, emotional complaint &mdash; turned into a specific, structural solution. The need was user&#8209;sourced. <strong>The mechanism was designer&#8209;imagined.</strong></p>
+        </div>
+        <div class="card-zone r">
+          <span class="note note-1" aria-hidden="true">&#9834;</span>
+          <span class="note note-2" aria-hidden="true">&#9835;</span>
+          <span class="note note-3" aria-hidden="true">&#9834;</span>
+          <div class="card">
+            <div class="card-head">
+              <div class="card-cover" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <defs>
+                    <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#1ed760" />
+                      <stop offset="0.55" stop-color="#4ef0c0" />
+                      <stop offset="1" stop-color="#a45cff" />
+                    </linearGradient>
+                  </defs>
+                  <g stroke="url(#cg)" stroke-width="2.4" stroke-linecap="round" fill="none">
+                    <circle cx="32" cy="32" r="6" />
+                    <circle cx="32" cy="32" r="12" stroke-dasharray="5 4" />
+                    <circle cx="32" cy="32" r="18" stroke-dasharray="2 6" class="spin-slow" />
+                    <circle cx="32" cy="32" r="24" stroke-dasharray="9 5" class="spin-rev" />
+                  </g>
+                </svg>
+              </div>
+              <div>
+                <p class="card-eyebrow mono">PLAYLIST</p>
+                <p class="card-title">Discover Weekly</p>
+                <p class="card-sub mono">MADE FOR YOU &middot; UPDATES MONDAY</p>
+              </div>
+            </div>
+            <div class="card-actions">
+              <span class="play-pill mono">&#9654;&nbsp;&nbsp;PLAY</span>
+              <span class="card-more mono">&middot;&middot;&middot;</span>
+            </div>
+            <ul class="card-list mono">
+              <li class="playing">
+                <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>A song you&rsquo;d never search for</span><span>3:12</span>
+              </li>
+              <li><span>02</span><span>An artist you&rsquo;ve never heard of</span><span>2:58</span></li>
+              <li><span>03</span><span>Exactly your taste. Somehow.</span><span>4:05</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · THE DANGER -->
+    <section class="panel s13" id="s13">
+      <div class="meta mono r"><span>14</span><span>39:00</span><span>THE DANGER</span></div>
+      <div class="wrap center">
+        <p class="kicker mono r">THE RISK, IF WE SKIP ALL OF THIS</p>
+        <h2 class="danger-old r"><span class="strike"><span>&ldquo;What do you want?&rdquo;</span></span></h2>
+        <h2 class="danger-new r">&ldquo;What are you trying to <em>achieve</em>?&rdquo;</h2>
+        <p class="sub r">Ask people what they want, and we optimize yesterday &mdash; small, safe, incremental improvements to a thing that may not need to exist in its current form at all.</p>
+      </div>
+    </section>
+
+    <!-- 15 · BIG IDEA 3 -->
+    <section class="panel s14 idea" id="s14">
+      <div class="meta mono r"><span>15</span><span>42:00</span><span>BIG IDEA Nº3</span></div>
+      <div class="wrap center">
+        <p class="kicker mono accent r">BIG IDEA Nº3</p>
+        <h2 class="display r">User&#8209;<em>inspired</em>.<br />Not user&#8209;<em>directed</em>.</h2>
+        <p class="sub r">Grounded in real pain, real behavior, real constraints &mdash; without handing the steering wheel to a feature-request list and calling it a roadmap.</p>
+      </div>
+    </section>
+
+    <!-- 16 · THE BALANCE -->
+    <section class="panel s15" id="s15">
+      <div class="meta mono r"><span>16</span><span>44:00</span><span>LIVE MOMENT</span></div>
+      <div class="wrap center">
+        <p class="kicker mono accent r">PLACE YOURSELF ON THIS LINE</p>
+        <h2 class="display-md r">Where did your last project <em>actually</em> sit?</h2>
+        <div class="spectrum r" data-hi="6">
+          <div class="spec-ends">
+            <span class="spec-word">Research</span>
+            <span class="spec-word">Vision</span>
+          </div>
+          <div class="spec-line"><span class="spec-track"></span></div>
+          <div class="spec-caps mono">
+            <span>TOO FAR &rarr; INCREMENTAL INNOVATION</span>
+            <span>TOO FAR &rarr; PRODUCTS NOBODY WANTS</span>
+          </div>
+        </div>
+        <p class="cue r">run your cursor along the line</p>
+        <p class="sub r">The mistake isn&rsquo;t picking a point on the line. It&rsquo;s not realizing you&rsquo;re allowed to move along it.</p>
+      </div>
+    </section>
+
+    <!-- 17 · FINAL -->
+    <section class="panel s16" id="s16">
+      <div class="meta mono r"><span>17</span><span>48:00</span><span>THE CLOSE</span></div>
+      <div class="wrap center">
+        <p class="kicker mono r">UCD NEVER MEANT &ldquo;LET USERS DESIGN THE PRODUCT.&rdquo;</p>
+        <h2 class="display final-line-1 r">Users reveal <em>reality</em>.</h2>
+        <h2 class="display final-line-2 r">Designers reveal <em>possibility</em>.</h2>
+        <p class="sub r">Our job was never to choose between them. It&rsquo;s to hold both at once.</p>
+        <p class="mono dim-label r final-thanks">THANK YOU &mdash; LET&rsquo;S OPEN IT UP</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Libraries (UMD globals) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module" src="main.js?v=13"></script>
+</body>
+</html>
