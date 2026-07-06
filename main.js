@@ -146,105 +146,97 @@ function glyphShape(text, opts, fallback) {
 }
 
 // --- five product icons drawn on canvas (timeline) ---
+// Bold, filled silhouettes so the limited particle budget lands on clear
+// shapes instead of scattering into fuzz. Group id 1-5 per product.
 function icons() {
-  const cw = 2600, ch = 560;
+  const cw = 2600, ch = 640;
   const cnv = document.createElement('canvas');
   cnv.width = cw; cnv.height = ch;
   const ctx = cnv.getContext('2d', { willReadFrequently: true });
   ctx.strokeStyle = '#fff';
   ctx.fillStyle = '#fff';
-  ctx.lineWidth = 11;
+  ctx.lineWidth = 24;
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
   const y = ch / 2;
+  const cxs = [260, 780, 1300, 1820, 2340];
 
-  // 1 — cassette tape (Walkman)
-  let cx = 260;
-  ctx.beginPath(); ctx.roundRect(cx - 160, y - 100, 320, 200, 20); ctx.stroke();
-  ctx.beginPath(); ctx.roundRect(cx - 118, y - 72, 236, 66, 12); ctx.stroke();   // label window
-  for (const rx of [-62, 62]) {                                                   // reels + teeth
-    ctx.beginPath(); ctx.arc(cx + rx, y - 39, 26, 0, 7); ctx.stroke();
-    for (let i = 0; i < 3; i++) {
-      const a = (i / 3) * Math.PI * 2 + 0.5;
-      ctx.beginPath();
-      ctx.moveTo(cx + rx + Math.cos(a) * 10, y - 39 + Math.sin(a) * 10);
-      ctx.lineTo(cx + rx + Math.cos(a) * 24, y - 39 + Math.sin(a) * 24);
-      ctx.stroke();
-    }
-  }
-  ctx.beginPath(); ctx.moveTo(cx - 100, y + 100); ctx.lineTo(cx - 78, y + 42); ctx.lineTo(cx + 78, y + 42); ctx.lineTo(cx + 100, y + 100); ctx.stroke();
-  for (const [sx, sy] of [[-142, -82], [142, -82], [-142, 82], [142, 82]]) {      // screws
-    ctx.beginPath(); ctx.arc(cx + sx, y + sy, 7, 0, 7); ctx.fill();
-  }
-
-  // 2 — iPhone (notch, screen, home bar)
-  cx = 780;
-  ctx.beginPath(); ctx.roundRect(cx - 90, y - 170, 180, 340, 36); ctx.stroke();
-  ctx.beginPath(); ctx.roundRect(cx - 72, y - 152, 144, 304, 20); ctx.stroke();   // screen
-  ctx.beginPath(); ctx.roundRect(cx - 36, y - 158, 72, 18, 9); ctx.fill();        // notch
-  ctx.beginPath(); ctx.moveTo(cx - 30, y + 134); ctx.lineTo(cx + 30, y + 134); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cx + 94, y - 90); ctx.lineTo(cx + 94, y - 40); ctx.stroke(); // side button
-
-  // 3 — Airbnb Bélo
-  cx = 1300;
+  // 1 — cassette tape (Walkman): bold body, solid label, punched reels
+  let cx = cxs[0];
+  ctx.beginPath(); ctx.roundRect(cx - 175, y - 112, 350, 224, 26); ctx.stroke();
+  ctx.beginPath(); ctx.roundRect(cx - 122, y - 78, 244, 62, 14); ctx.fill();
+  ctx.save(); ctx.globalCompositeOperation = 'destination-out';
+  for (const rx of [-66, 66]) { ctx.beginPath(); ctx.arc(cx + rx, y - 47, 22, 0, 7); ctx.fill(); }
+  ctx.restore();
   ctx.beginPath();
-  ctx.moveTo(cx, y - 135);
-  ctx.bezierCurveTo(cx - 28, y - 135, cx - 30, y - 100, cx - 52, y - 40);
-  ctx.bezierCurveTo(cx - 72, y + 14, cx - 105, y + 60, cx - 105, y + 92);
-  ctx.bezierCurveTo(cx - 105, y + 130, cx - 72, y + 148, cx - 45, y + 138);
-  ctx.bezierCurveTo(cx - 22, y + 130, cx - 8, y + 112, cx, y + 96);
-  ctx.moveTo(cx, y - 135);
-  ctx.bezierCurveTo(cx + 28, y - 135, cx + 30, y - 100, cx + 52, y - 40);
-  ctx.bezierCurveTo(cx + 72, y + 14, cx + 105, y + 60, cx + 105, y + 92);
-  ctx.bezierCurveTo(cx + 105, y + 130, cx + 72, y + 148, cx + 45, y + 138);
-  ctx.bezierCurveTo(cx + 22, y + 130, cx + 8, y + 112, cx, y + 96);
+  ctx.moveTo(cx - 98, y + 112); ctx.lineTo(cx - 72, y + 46);
+  ctx.lineTo(cx + 72, y + 46); ctx.lineTo(cx + 98, y + 112);
   ctx.stroke();
-  ctx.beginPath(); ctx.ellipse(cx, y + 60, 40, 44, 0, 0, 7); ctx.stroke();        // inner loop
 
-  // 4 — car (Uber)
-  cx = 1820;
+  // 2 — iPhone: clean rounded slab, solid notch, home bar
+  cx = cxs[1];
+  ctx.beginPath(); ctx.roundRect(cx - 100, y - 186, 200, 372, 44); ctx.stroke();
+  ctx.beginPath(); ctx.roundRect(cx - 36, y - 178, 72, 22, 11); ctx.fill();
+  ctx.lineWidth = 16;
+  ctx.beginPath(); ctx.moveTo(cx - 36, y + 156); ctx.lineTo(cx + 36, y + 156); ctx.stroke();
+  ctx.lineWidth = 24;
+
+  // 3 — Airbnb Bélo: bold single stroke
+  cx = cxs[2];
   ctx.beginPath();
-  ctx.moveTo(cx - 135, y + 58); ctx.lineTo(cx - 135, y + 28);
-  ctx.quadraticCurveTo(cx - 130, y + 6, cx - 95, y + 2);
-  ctx.lineTo(cx - 62, y - 2);
-  ctx.quadraticCurveTo(cx - 30, y - 48, cx + 18, y - 48);
-  ctx.quadraticCurveTo(cx + 72, y - 48, cx + 98, y - 6);
-  ctx.lineTo(cx + 118, y);
-  ctx.quadraticCurveTo(cx + 140, y + 10, cx + 140, y + 32);
-  ctx.lineTo(cx + 140, y + 58);
+  ctx.moveTo(cx, y - 156);
+  ctx.bezierCurveTo(cx - 32, y - 156, cx - 36, y - 112, cx - 60, y - 44);
+  ctx.bezierCurveTo(cx - 84, y + 20, cx - 120, y + 70, cx - 120, y + 104);
+  ctx.bezierCurveTo(cx - 120, y + 148, cx - 80, y + 168, cx - 48, y + 154);
+  ctx.bezierCurveTo(cx - 24, y + 144, cx - 8, y + 124, cx, y + 106);
+  ctx.moveTo(cx, y - 156);
+  ctx.bezierCurveTo(cx + 32, y - 156, cx + 36, y - 112, cx + 60, y - 44);
+  ctx.bezierCurveTo(cx + 84, y + 20, cx + 120, y + 70, cx + 120, y + 104);
+  ctx.bezierCurveTo(cx + 120, y + 148, cx + 80, y + 168, cx + 48, y + 154);
+  ctx.bezierCurveTo(cx + 24, y + 144, cx + 8, y + 124, cx, y + 106);
   ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cx - 42, y - 6); ctx.lineTo(cx - 16, y - 40); ctx.stroke();  // windshield
-  ctx.beginPath(); ctx.moveTo(cx + 50, y - 40); ctx.lineTo(cx + 72, y - 8); ctx.stroke();  // rear window
-  for (const wx of [-72, 78]) {                                                    // wheels
-    ctx.beginPath(); ctx.arc(cx + wx, y + 58, 32, 0, 7); ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx + wx, y + 58, 12, 0, 7); ctx.fill();
-  }
+
+  // 4 — car (Uber): bold silhouette, solid wheels
+  cx = cxs[3];
+  ctx.beginPath();
+  ctx.moveTo(cx - 156, y + 70);
+  ctx.lineTo(cx - 156, y + 30);
+  ctx.quadraticCurveTo(cx - 150, y + 2, cx - 108, y - 2);
+  ctx.lineTo(cx - 72, y - 6);
+  ctx.quadraticCurveTo(cx - 34, y - 58, cx + 22, y - 58);
+  ctx.quadraticCurveTo(cx + 84, y - 58, cx + 114, y - 10);
+  ctx.lineTo(cx + 136, y - 4);
+  ctx.quadraticCurveTo(cx + 160, y + 8, cx + 160, y + 34);
+  ctx.lineTo(cx + 160, y + 70);
+  ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx - 80, y + 70, 36, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx + 90, y + 70, 36, 0, 7); ctx.fill();
 
   // 5 — Netflix "N" (solid letterform)
-  cx = 2340;
-  ctx.fillRect(cx - 78, y - 135, 44, 270);
-  ctx.fillRect(cx + 34, y - 135, 44, 270);
+  cx = cxs[4];
+  ctx.fillRect(cx - 86, y - 152, 50, 304);
+  ctx.fillRect(cx + 36, y - 152, 50, 304);
   ctx.beginPath();
-  ctx.moveTo(cx - 78, y - 135); ctx.lineTo(cx - 34, y - 135);
-  ctx.lineTo(cx + 78, y + 135); ctx.lineTo(cx + 34, y + 135);
+  ctx.moveTo(cx - 86, y - 152); ctx.lineTo(cx - 36, y - 152);
+  ctx.lineTo(cx + 86, y + 152); ctx.lineTo(cx + 36, y + 152);
   ctx.closePath(); ctx.fill();
 
   const data = ctx.getImageData(0, 0, cw, ch).data;
   const raw = [];
-  const s = 7.5 / cw;
+  const s = 7.9 / cw;
   for (let py = 0; py < ch; py += 2) {
     for (let px = 0; px < cw; px += 2) {
       if (data[(py * cw + px) * 4 + 3] > 60) {
         raw.push([
           (px - cw / 2) * s,
           -(py - ch / 2) * s,
-          (Math.random() - 0.5) * 0.12,
+          (Math.random() - 0.5) * 0.09,
           1 + Math.min(4, Math.floor(px / 520)),      // hover group per product
         ]);
       }
     }
   }
-  return fitPoints(raw, 0.008);
+  return fitPoints(raw, 0.006);
 }
 
 // --- bicycle family (live exercise, three beats) ---
@@ -488,17 +480,19 @@ function soundburst() {
 }
 
 // --- lightsaber beam between Research and Vision (hover group 6) ---
-// Positioned at runtime to sit exactly on the DOM hairline.
+// Positioned at runtime to sit exactly on the DOM hairline. Kept as a very
+// tight core so at rest it reads as one crisp hairline of light; the hover
+// welding/scan effect lives in the shader.
 function spectrum() {
   const raw = [];
-  linePts(-3.1, 0, 3.1, 0, 1600, raw, 0, 6);           // hot core
-  for (let i = 0; i < 1500; i++) {                     // soft plasma sheath
-    raw.push([-3.1 + Math.random() * 6.2, gauss() * 0.055, gauss() * 0.055, 6]);
+  linePts(-3.1, 0, 3.1, 0, 3200, raw, 0, 6);           // dense hot core
+  for (let i = 0; i < 700; i++) {                      // whisper-thin sheath
+    raw.push([-3.1 + Math.random() * 6.2, gauss() * 0.014, gauss() * 0.014, 6]);
   }
-  for (const ex of [-3.22, 3.22]) {                    // emitter caps
-    for (let i = 0; i < 110; i++) raw.push([ex + gauss() * 0.04, gauss() * 0.08, gauss() * 0.08, 6]);
+  for (const ex of [-3.15, 3.15]) {                    // emitter caps
+    for (let i = 0; i < 130; i++) raw.push([ex + gauss() * 0.05, gauss() * 0.05, gauss() * 0.05, 6]);
   }
-  return fitPoints(raw, 0.01);
+  return fitPoints(raw, 0.005);
 }
 
 // --- 1908 Ford Model T (the quote slide) ---
@@ -573,7 +567,7 @@ const META = [
   { off: [0, 0.1, 0],      sc: 1.12, colA: IVORY,     colB: '#8f7bff', op: 0.8  }, // 0 hero — sphere
   { off: [0, 0, -0.7],     sc: 1,    colA: IVORY,     colB: '#ffd9a0', op: 0.75 }, // 1 quote — “ + Model T
   { off: [2.6, 0, -0.5],   sc: 1,    colA: IVORY,     colB: '#7cc4ff', op: 0.9  }, // 2 question — ?
-  { off: [0, 1.15, 0],     sc: 0.95, colA: IVORY,     colB: '#ffc46b', op: 0.95 }, // 3 timeline — icons
+  { off: [0, 1.85, -0.2],  sc: 0.98, colA: IVORY,     colB: '#ffc46b', op: 1    }, // 3 timeline — icons
   { off: [0, -0.1, -1],    sc: 1,    colA: ACCENT,    colB: '#ffc46b', op: 0.6  }, // 4 idea 1 — split
   { off: [0, 0.1, -0.6],   sc: 1.05, colA: IVORY,     colB: '#7cc4ff', op: 0.75 }, // 5 ≠
   { off: [2.1, -0.15, 0],  sc: 1,    colA: IVORY,     colB: '#9adcff', op: 1    }, // 6 bicycle — the question
@@ -641,6 +635,7 @@ const uniforms = {
   uHiGroup: { value: -1 },
   uHiMix: { value: 0 },
   uMx: { value: 999 },
+  uIgnite: { value: 0 }, // left-to-right laser ignition sweep (balance slide)
 };
 
 const material = new THREE.ShaderMaterial({
@@ -654,7 +649,7 @@ const material = new THREE.ShaderMaterial({
     attribute float aRand;
     attribute float aSize;
     attribute float aGroup;
-    uniform float uProgress, uTime, uBurst, uHeight, uHiGroup, uHiMix, uMx;
+    uniform float uProgress, uTime, uBurst, uHeight, uHiGroup, uHiMix, uMx, uIgnite;
     uniform vec3 uColorA, uColorB;
     varying float vAlpha;
     varying vec3 vColor;
@@ -667,26 +662,45 @@ const material = new THREE.ShaderMaterial({
       t = t * t * (3.0 - 2.0 * t);
       vec3 pos = mix(position, aTarget, t);
 
+      float isBeam = step(5.5, aGroup); // group 6 (the laser) => 1
+
       float burst = sin(t * PI);
       pos += aNoiseDir * burst * uBurst;
       // tangential swirl while in flight — particles corkscrew between shapes
       vec3 tang = cross(aNoiseDir, vec3(0.0, 0.0, 1.0));
       pos += tang * burst * uBurst * 0.65 * (aRand - 0.5) * 2.0;
 
-      // breathing idle drift — always alive, even at rest
-      pos += 0.07 * vec3(
+      // breathing idle drift — always alive, but the laser barely moves so it stays crisp
+      pos += 0.07 * (1.0 - isBeam * 0.94) * vec3(
         sin(pos.y * 1.7 + uTime * 0.6 + aRand * 6.28),
         sin(pos.z * 1.9 + uTime * 0.5 + aRand * 6.28),
         sin(pos.x * 1.5 + uTime * 0.7)
       );
 
-      // hover highlight — matched group ignites with a travelling beam pulse
       float match = step(abs(aGroup - uHiGroup), 0.45);
-      float beam = 0.5 + 0.5 * sin(pos.x * 5.0 - uTime * 12.0);
-      float prox = exp(-abs(pos.x - uMx) * 1.7);
-      vHi = uHiMix * match * (0.7 + 0.9 * beam + 1.8 * prox);
+      float h = uHiMix * match;
+
+      // --- generic hover (icons, bike parts, stages): steady ignite + travelling
+      // shimmer + a bright spot that follows the cursor across the shape ---
+      float shimmer = 0.5 + 0.5 * sin(pos.x * 5.0 - uTime * 12.0);
+      float proxG = exp(-abs(pos.x - uMx) * 1.7);
+      float genHi = 0.7 + 0.9 * shimmer + 1.8 * proxG;
+
+      // --- laser hover (group 6): crisp beam, L->R ignition, travelling scan, welding sparks ---
+      float nx = (pos.x + 3.1) / 6.2;                        // 0..1 along the beam
+      float lit = smoothstep(uIgnite + 0.06, uIgnite - 0.16, nx); // fills left-to-right
+      float scanX = -3.1 + 6.2 * fract(uTime * 0.32);        // scanning band of light
+      float scan = exp(-abs(pos.x - scanX) * 2.4);
+      float weld = exp(-abs(pos.x - uMx) * 5.5);             // tight welding hotspot at the cursor
+      float beamHi = lit * (0.35 + 0.7 * scan) + 2.4 * weld;
+
+      vHi = h * mix(genHi, beamHi, isBeam);
       vDim = uHiMix * (1.0 - match);
-      pos.y += vHi * 0.035 * sin(uTime * 9.0 + aRand * 6.28);
+
+      // welding sparks — only the laser, only right at the cursor: scatter a few points out
+      float spark = weld * h * isBeam;
+      pos += aNoiseDir * spark * 0.20 * (0.5 + 0.9 * sin(uTime * 36.0 + aRand * 44.0));
+      pos.y += vHi * 0.03 * sin(uTime * 9.0 + aRand * 6.28) * (1.0 - isBeam);
 
       vec4 mv = modelViewMatrix * vec4(pos, 1.0);
       gl_Position = projectionMatrix * mv;
@@ -753,6 +767,7 @@ function morphTo(idx, instant = false) {
   else grpAttr.array.fill(0);
   grpAttr.needsUpdate = true;
   gsap.to(uniforms.uHiMix, { value: 0, duration: 0.3, overwrite: 'auto' });
+  gsap.to(uniforms.uIgnite, { value: 0, duration: 0.3, overwrite: 'auto' });
   state.progress = 0;
   uniforms.uProgress.value = 0;
 
@@ -870,7 +885,7 @@ function measure() {
   offsets = sections.map(s => s.offsetTop);
 }
 
-const lenis = new Lenis({ duration: 1.15, smoothWheel: true, touchMultiplier: 1.4 });
+const lenis = new Lenis({ duration: 1.25, smoothWheel: true, touchMultiplier: 1.25 });
 window.__lenis = lenis;
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add(time => {
@@ -889,30 +904,51 @@ function nearestIndex(scroll) {
 }
 
 lenis.on('scroll', ({ scroll }) => {
-  const idx = nearestIndex(scroll + window.innerHeight * 0.25);
+  const idx = nearestIndex(scroll + window.innerHeight * 0.45);
   if (idx !== state.current && state.current !== -1) applySection(idx);
 });
 
-// soft snap when scrolling settles
-let lastInteract = 0, snapLock = false;
-['wheel', 'touchstart', 'touchmove', 'keydown'].forEach(ev =>
-  window.addEventListener(ev, () => { lastInteract = performance.now(); snapLock = false; }, { passive: true })
+// Smooth ease-in-out with a soft, spring-like settle. Kept strictly within [0,1]
+// on purpose: a real overshoot spring goes past the scroll bounds (below 0 at the
+// top, past the limit at the end) and Lenis clamps there, which freezes the tween.
+// This quint-out tail gives an elastic, gently-decelerating feel without that risk.
+function springEase(t) {
+  if (t <= 0) return 0;
+  if (t >= 1) return 1;
+  return t < 0.5
+    ? 4 * t * t * t                         // cubic ease-in
+    : 1 - Math.pow(-2 * t + 2, 4.6) / 2;    // soft quint-ish ease-out (springy settle)
+}
+
+let lastInteract = 0, snapLock = false, snapping = false;
+function snapTo(target, duration = 1.0) {
+  snapLock = true; snapping = true;
+  lenis.scrollTo(target, {
+    duration,
+    easing: springEase,
+    onComplete: () => { snapLock = false; snapping = false; },
+  });
+}
+// any fresh user input cancels an in-flight snap so we never fight the scroll
+function onUserScroll() {
+  lastInteract = performance.now();
+  if (snapping) { snapping = false; snapLock = false; }
+}
+['wheel', 'touchstart', 'touchmove', 'pointerdown'].forEach(ev =>
+  window.addEventListener(ev, onUserScroll, { passive: true })
 );
+
+// snap to the NEAREST section only once the scroll has genuinely settled — no forward bias,
+// so a small scroll never yanks you to the next frame
 gsap.ticker.add(() => {
   if (snapLock) return;
-  if (performance.now() - lastInteract < 200) return;
-  if (Math.abs(lenis.velocity) > 0.3) return;
-  const dir = lenis.direction >= 0 ? 1 : -1;
-  const idx = nearestIndex(lenis.scroll + dir * window.innerHeight * 0.22);
+  if (lenis.isScrolling === 'smooth') return; // a programmatic scroll is already running
+  if (performance.now() - lastInteract < 170) return;
+  if (Math.abs(lenis.velocity) > 0.055) return;
+  const idx = nearestIndex(lenis.scroll);
   const target = offsets[idx];
-  if (Math.abs(target - lenis.scroll) > 3) {
-    snapLock = true;
-    lenis.scrollTo(target, {
-      duration: 0.9,
-      easing: x => 1 - Math.pow(1 - x, 4),
-      onComplete: () => (snapLock = false),
-    });
-  }
+  if (Math.abs(target - lenis.scroll) < 6) return;
+  snapTo(target);
 });
 
 // keyboard navigation
@@ -925,8 +961,7 @@ window.addEventListener('keydown', e => {
   if (e.key === 'End') next = sections.length - 1;
   if (next !== null) {
     e.preventDefault();
-    snapLock = true;
-    lenis.scrollTo(offsets[next], { duration: 1.1, easing: x => 1 - Math.pow(1 - x, 4), onComplete: () => (snapLock = false) });
+    snapTo(offsets[next], 1.1);
   }
 });
 
@@ -935,10 +970,7 @@ const dotsWrap = document.getElementById('dots');
 const dotsEls = sections.map((_, i) => {
   const b = document.createElement('button');
   b.setAttribute('aria-label', `Slide ${i + 1}`);
-  b.addEventListener('click', () => {
-    snapLock = true;
-    lenis.scrollTo(offsets[i], { duration: 1.2, easing: x => 1 - Math.pow(1 - x, 4), onComplete: () => (snapLock = false) });
-  });
+  b.addEventListener('click', () => snapTo(offsets[i], 1.2));
   dotsWrap.appendChild(b);
   return b;
 });
@@ -948,12 +980,15 @@ const dotsEls = sections.map((_, i) => {
    ------------------------------------------------------------ */
 
 document.querySelectorAll('[data-hi]').forEach(el => {
+  const g = +el.dataset.hi;
   el.addEventListener('mouseenter', () => {
-    uniforms.uHiGroup.value = +el.dataset.hi;
+    uniforms.uHiGroup.value = g;
     gsap.to(uniforms.uHiMix, { value: 1, duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
+    if (g === 6) gsap.to(uniforms.uIgnite, { value: 1, duration: 0.75, ease: 'power2.out', overwrite: 'auto' });
   });
   el.addEventListener('mouseleave', () => {
     gsap.to(uniforms.uHiMix, { value: 0, duration: 0.7, ease: 'power2.out', overwrite: 'auto' });
+    if (g === 6) gsap.to(uniforms.uIgnite, { value: 0, duration: 0.5, ease: 'power2.in', overwrite: 'auto' });
   });
 });
 
@@ -971,21 +1006,42 @@ sections.forEach((sec, i) => {
 
 const cursorEl = document.getElementById('cursor');
 if (cursorEl && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-  let cx = -100, cy = -100, ctx2 = -100, cty = -100;
+  // Detect interactivity by sampling the element under the pointer every move.
+  // This can never get "stuck" the way per-element enter/leave listeners do.
+  const HOT = '[data-hi], .ui-dots button, .card, a, .spectrum, .timeline-row li, .answers li, .stage, .play-pill';
+  let cx = -100, cy = -100, tx = -100, ty = -100, grown = false;
   window.addEventListener('pointermove', e => {
-    ctx2 = e.clientX; cty = e.clientY;
+    tx = e.clientX; ty = e.clientY;
     document.body.classList.add('has-cursor');
+    const el = document.elementFromPoint(tx, ty);
+    const hot = !!(el && el.closest(HOT));
+    if (hot !== grown) { grown = hot; cursorEl.classList.toggle('grow', hot); }
   });
+  window.addEventListener('pointerdown', () => cursorEl.classList.add('press'));
+  window.addEventListener('pointerup', () => cursorEl.classList.remove('press'));
+  document.addEventListener('mouseleave', () => document.body.classList.remove('has-cursor'));
   gsap.ticker.add(() => {
-    cx += (ctx2 - cx) * 0.22;
-    cy += (cty - cy) * 0.22;
+    cx += (tx - cx) * 0.3;
+    cy += (ty - cy) * 0.3;
     cursorEl.style.transform = `translate(${cx}px, ${cy}px)`;
   });
-  document.querySelectorAll('[data-hi], .ui-dots button, .card, a').forEach(el => {
-    el.addEventListener('mouseenter', () => cursorEl.classList.add('grow'));
-    el.addEventListener('mouseleave', () => cursorEl.classList.remove('grow'));
-  });
 }
+
+/* ------------------------------------------------------------
+   Idle chrome fade — after 1s without input, all UI chrome steps
+   aside so the room sees only the graphic and the content
+   ------------------------------------------------------------ */
+
+let idleTimer = null;
+function bumpIdle() {
+  document.body.classList.remove('idle');
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => document.body.classList.add('idle'), 1000);
+}
+['pointermove', 'wheel', 'touchstart', 'keydown'].forEach(ev =>
+  window.addEventListener(ev, bumpIdle, { passive: true })
+);
+bumpIdle();
 
 /* ------------------------------------------------------------
    Text reveals per section
