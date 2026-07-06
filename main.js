@@ -1,9 +1,13 @@
 import * as THREE from 'three';
+import { inject } from '@vercel/analytics';
 
 /* ============================================================
    THE ILLUSION OF USER-CENTERED DESIGN
    Scroll-driven particle deck — Three.js + GSAP + Lenis
    ============================================================ */
+
+// Initialize Vercel Web Analytics
+inject();
 
 gsap.registerPlugin(ScrollTrigger);
 
